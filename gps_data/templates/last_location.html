@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Last Location on Google Map</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styling for the map container */
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+    <!-- Google Maps JavaScript API (Replace 'YOUR_API_KEY' with your actual Google Maps API key) -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCaniKMTF9PGQ9jXxG3Qa8AxHUCKMbSZ4"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Last Known Location</h2>
+        <div id="map" class="mt-4 border rounded"></div>
+        <p class="text-center mt-3">
+            <strong>Latitude:</strong> {{ latitude }}<br>
+            <strong>Longitude:</strong> {{ longitude }}
+        </p>
+    </div>
+
+    <script>
+        function initMap() {
+            // Coordinates from the context variables passed to the template
+            const latitude = {{ latitude }};
+            const longitude = {{ longitude }};
+
+            // Map options
+            const mapOptions = {
+                zoom: 15,
+                center: { lat: latitude, lng: longitude }
+            };
+
+            // Create map
+            const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            // Add a marker at the last known location
+            new google.maps.Marker({
+                position: { lat: latitude, lng: longitude },
+                map: map,
+                title: "Last Known Location"
+            });
+        }
+
+        // Initialize map
+        window.onload = initMap;
+    </script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
