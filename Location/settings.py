@@ -1,4 +1,5 @@
 from pathlib import Path
+import stripe
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'gps_data',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -102,7 +104,17 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+STRIPE_SECRET_KEY = 'sk_test_51Q2rvAP8hxrrVp0fbs34XLeYMuooq4b3nTE4jsJxCOO3As9YSb1BLrYrblghBTQH5EpNH6a6nBAy18aeMYc3fpOK00mD0iAkKx'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51Q2rvAP8hxrrVp0fZ0miWIgQqDyMmPNxo1awO0h5iT3updslnKb2ejhY31innIjYCXrYAY43ZhYHJmov9POtyuxO0082u98uMY'
+
+stripe.api_key = STRIPE_SECRET_KEY
