@@ -32,7 +32,7 @@ class ConfirmPaymentView(generics.GenericAPIView):
     
 
 def create_payment(request):    
-    amount = 20
+    amount = 3
     payment_url = f"{request.build_absolute_uri('/payment/proceed/')}{amount}"
     qr = qrcode.make(payment_url)
     response = HttpResponse(content_type="image/png")
